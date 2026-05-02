@@ -188,6 +188,11 @@ function loadSeenCompanyRoles() {
 function appendToPipeline(offers) {
   if (offers.length === 0) return;
 
+  // Create pipeline.md if it doesn't exist yet
+  if (!existsSync(PIPELINE_PATH)) {
+    writeFileSync(PIPELINE_PATH, '# Pipeline — Pending URLs\n\n## Pendientes\n\n', 'utf-8');
+  }
+
   let text = readFileSync(PIPELINE_PATH, 'utf-8');
 
   // Find "## Pendientes" section and append after it
